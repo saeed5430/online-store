@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'Account_Module',
     'django_render_partial',
     'site_module',
-    'article_module'
+    'article_module',
+    'sorl.thumbnail'
 ]
 
 MIDDLEWARE = [
