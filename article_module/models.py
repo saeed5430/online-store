@@ -1,4 +1,6 @@
+from jalali_date import date2jalali
 from django.db import models
+from django.utils import timezone
 
 from Account_Module.models import User
 
@@ -23,10 +25,18 @@ class Article(models.Model):
     text = models.TextField(verbose_name='متن مقاله')
     is_active=models.BooleanField(default=True,verbose_name='فعال/غیرفعال')
     selected_category=models.ManyToManyField(ArticleCategory,verbose_name='دسته بندی ها')
-    author = models.ForeignKey(User,on_delete = models.CASCADE,verbose_name='نویسنده',null=True)
+    author = models.ForeignKey(User,on_delete = models.CASCADE,verbose_name='نویسنده',null=True,editable=False)
+    create_date = models.DateTimeField(auto_now_add=True,editable=False,null=True,verbose_name='تاریخ ثبت')
+
 
     def __str__(self):
         return self.title
+
+    def get_jalali_create_date(self):
+        return date2jalali(self.create_date)
+
+    def get_jalali_create_time(self):
+        return self.create_date.strftime('%H:%M')
     class Meta:
         verbose_name = 'مقاله'
         verbose_name_plural = 'مقاله ها'

@@ -1,5 +1,6 @@
 {% extends 'shared/layout.html' %}
 {% load thumbnail %}
+{% load jalali_tags %}
 
 {% block title %}
 	لیست مقالات
@@ -20,9 +21,11 @@
 							<h3>{{ article.title }}</h3>
 							<div class="post-meta">
 								<ul>
-									<li><i class="fa fa-user"></i> کاربـر 1</li>
-									<li><i class="fa fa-clock-o"></i> 17:20 ب.ظ</li>
-									<li><i class="fa fa-calendar"></i> 28 تیـر 1397</li>
+									{% if article.author %}
+										<li><i class="fa fa-user"></i>{{ article.author }}</li>
+									{% endif %}
+									<li><i class="fa fa-clock-o"></i>{{ article.create_date|to_jalali:"%H:%M" }}</li>
+									<li><i class="fa fa-calendar"></i>{{ article.create_date|to_jalali:"%Y/%m/%d" }}</li>
 								</ul>
 								<span>
 										<i class="fa fa-star"></i>
