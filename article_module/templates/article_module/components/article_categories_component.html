@@ -1,0 +1,56 @@
+{#        <div class="panel panel-default">#}
+{#            <div class="panel-heading">#}
+{#                <h4 class="panel-title">#}
+{#                    <a data-toggle="collapse" data-parent="#accordian" href="#sportswear">#}
+{#                        <span class="badge pull-right"><i class="fa fa-plus"></i></span>#}
+{#                        دسته 1#}
+{#                    </a>#}
+{#                </h4>#}
+{#            </div>#}
+{#            <div id="sportswear" class="panel-collapse collapse">#}
+{#                <div class="panel-body">#}
+{#                    <ul>#}
+{#                        <li><a href="">محصول 1 </a></li>#}
+{#                    </ul>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="panel panel-default">#}
+{#            <div class="panel-heading">#}
+{#                <h4 class="panel-title"><a href="#">محصول 1</a></h4>#}
+{#            </div>#}
+{#        </div>#}
+
+<h2>دسته بندی مقالات</h2>
+<div class="panel-group category-products" id="accordian"><!--category-productsr-->
+{% for main_category in main_categories %}
+    {% if main_category.articlecategory_set.all %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordian" href="#sportswear">
+                        <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                        {{ main_category.title }}
+                    </a>
+                </h4>
+            </div>
+            <div id="sportswear" class="panel-collapse collapse">
+                <div class="panel-body">
+                    {% for sub in main_category.articlecategory_set.all %}
+                        <div style="margin-bottom: 5px">
+                        <h4 class="panel-title"><a href="{{ sub.url_title }}">{{ sub.title }}</a></h4>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title"><a href="{{ main_category.url_title }}">{{ main_category.title }}</a></h4>
+            </div>
+        </div>
+    {% endif %}
+{% endfor %}
+</div>
+
