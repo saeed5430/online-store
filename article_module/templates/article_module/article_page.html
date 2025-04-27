@@ -49,7 +49,8 @@
 
 							</a>
                             <p>{{ article.short_description }}</p>
-							<a class="btn btn-primary" href="">ادامـه مطلب</a>
+                            <a class="btn btn-primary" href="{% url 'article_detail' pk=article.id %}">ادامه مطلب</a>
+
 						</div>
                         {% endfor %}
                         <ul class="pagination">

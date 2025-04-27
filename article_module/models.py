@@ -40,3 +40,17 @@ class Article(models.Model):
     class Meta:
         verbose_name = 'مقاله'
         verbose_name_plural = 'مقاله ها'
+
+class ArticleComments(models.Model):
+    article = models.ForeignKey(Article,on_delete=models.CASCADE,verbose_name='مقاله')
+    author = models.ForeignKey(User,on_delete = models.CASCADE,verbose_name='کاربر')
+    parent = models.ForeignKey('ArticleComments',null=True,blank=True,on_delete=models.CASCADE,verbose_name='نظر والد')
+    create_date = models.DateTimeField(auto_now_add=True,verbose_name='تاریخ ثبت')
+    text = models.TextField(verbose_name='متن نظر')
+    def get_jalali_create_date(self):
+        return date2jalali(self.create_date)
+    def __str__(self):
+        return self.article.title
+    class Meta:
+        verbose_name = 'نظر'
+        verbose_name_plural = 'نظرات'

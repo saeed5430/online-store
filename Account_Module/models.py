@@ -2,8 +2,9 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser,AbstractBaseUser
 
 class User(AbstractUser):
-    avatar = models.CharField(max_length=20,verbose_name="تصویر کاربر",null=True,blank=True)
+    avatar = models.ImageField(upload_to='images/profiles',max_length=40,verbose_name="تصویر کاربر",null=True,blank=True)
     email_active_code = models.CharField(max_length=100,verbose_name='کد فعال سازی ایمیل')
+    about= models.TextField(max_length=1000,verbose_name="متن درباره کاربر",null=True,blank=True)
 
     class Meta:
         verbose_name = "کاربر"
